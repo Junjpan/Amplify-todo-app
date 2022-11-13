@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
-import { createTodo } from './graphql/mutations';
+import { createTodo, deleteTodo } from './graphql/mutations';
 import { listTodos } from './graphql/queries';
+import { onDeleteTodo } from './graphql/subscriptions';
 
 const initialState = { name: '', description: '' };
 
@@ -10,6 +11,7 @@ const App = () => {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
+    console.log(API);
     fetchTodos();
   }, []);
 
@@ -40,6 +42,17 @@ const App = () => {
     }
   }
 
+  const deleteContent = async (todoId) => {
+    console.log(todoId);
+    try {
+      await API.graphql(
+        graphqlOperation(deleteTodo, { input: { id: todoId } })
+      );
+    } catch (err) {
+      console.log('delete todo', err);
+    }
+  };
+
   return (
     <div style={styles.container}>
       <h2>Amplify Todos</h2>
@@ -59,7 +72,13 @@ const App = () => {
         Create Todo
       </button>
       {todos.map((todo, index) => (
-        <div key={todo.id ? todo.id : index} style={styles.todo}>
+        <div
+          key={todo.id ? todo.id : index}
+          style={styles.todo}
+          onClick={() => {
+            deleteContent(todo.id);
+          }}
+        >
           <p style={styles.todoName}>{todo.name}</p>
           <p style={styles.todoDescription}>{todo.description}</p>
         </div>
