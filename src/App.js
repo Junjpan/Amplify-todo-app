@@ -11,7 +11,7 @@ const App = () => {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    console.log(API);
+  
     fetchTodos();
   }, []);
 
