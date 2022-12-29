@@ -7,6 +7,7 @@ export const getUser = /* GraphQL */ `
       id
       name
       email
+      createdAt
       status
       posts {
         items {
@@ -19,7 +20,6 @@ export const getUser = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
       updatedAt
     }
   }
@@ -35,11 +35,11 @@ export const listUsers = /* GraphQL */ `
         id
         name
         email
+        createdAt
         status
         posts {
           nextToken
         }
-        createdAt
         updatedAt
       }
       nextToken
@@ -56,11 +56,11 @@ export const getPost = /* GraphQL */ `
         id
         name
         email
+        createdAt
         status
         posts {
           nextToken
         }
-        createdAt
         updatedAt
       }
       createdAt
@@ -84,13 +84,45 @@ export const listPosts = /* GraphQL */ `
           id
           name
           email
-          status
           createdAt
+          status
           updatedAt
         }
         createdAt
         updatedAt
         userPostsId
+      }
+      nextToken
+    }
+  }
+`;
+export const userByEmail = /* GraphQL */ `
+  query UserByEmail(
+    $email: String!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    UserByEmail(
+      email: $email
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        email
+        createdAt
+        status
+        posts {
+          nextToken
+        }
+        updatedAt
       }
       nextToken
     }

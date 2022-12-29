@@ -7,6 +7,7 @@ export const onCreateUser = /* GraphQL */ `
       id
       name
       email
+      createdAt
       status
       posts {
         items {
@@ -19,7 +20,6 @@ export const onCreateUser = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
       updatedAt
     }
   }
@@ -30,6 +30,7 @@ export const onUpdateUser = /* GraphQL */ `
       id
       name
       email
+      createdAt
       status
       posts {
         items {
@@ -42,7 +43,6 @@ export const onUpdateUser = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
       updatedAt
     }
   }
@@ -53,6 +53,7 @@ export const onDeleteUser = /* GraphQL */ `
       id
       name
       email
+      createdAt
       status
       posts {
         items {
@@ -65,7 +66,6 @@ export const onDeleteUser = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
       updatedAt
     }
   }
@@ -80,11 +80,11 @@ export const onCreatePost = /* GraphQL */ `
         id
         name
         email
+        createdAt
         status
         posts {
           nextToken
         }
-        createdAt
         updatedAt
       }
       createdAt
@@ -103,11 +103,11 @@ export const onUpdatePost = /* GraphQL */ `
         id
         name
         email
+        createdAt
         status
         posts {
           nextToken
         }
-        createdAt
         updatedAt
       }
       createdAt
@@ -126,11 +126,11 @@ export const onDeletePost = /* GraphQL */ `
         id
         name
         email
+        createdAt
         status
         posts {
           nextToken
         }
-        createdAt
         updatedAt
       }
       createdAt
