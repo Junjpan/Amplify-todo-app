@@ -16,7 +16,7 @@ type Post @model{
   id:ID!
   title:String!
   content:String @default(value:"This is my first post")
-  userId:ID! @index(name:"byUser", sortKeyFields:["createdAt"])
+  userId:ID! @index(name:"byUser", sortKeyFields:["createdAt"],queryField:"PostByUserId")
   user:User @belongsTo(fields:["userId"])
   createdAt:AWSDateTime
 }

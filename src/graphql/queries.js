@@ -126,3 +126,40 @@ export const userByEmail = /* GraphQL */ `
     }
   }
 `;
+export const postByUserId = /* GraphQL */ `
+  query PostByUserId(
+    $userId: ID!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    PostByUserId(
+      userId: $userId
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        content
+        userId
+        user {
+          id
+          name
+          email
+          status
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
