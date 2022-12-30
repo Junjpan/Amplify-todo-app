@@ -7,17 +7,18 @@ input AMPLIFY {
 type User @model {
   id: ID!
   name: String!
-  email:String! @index(name:"byEmail",queryField:"UserByEmail",sortKeyFields:["createdAt"])
-  createdAt:AWSDateTime
+  email:String! @index(name:"byEmail",queryField:"UserByEmail")
   status:Status
-  posts:[Post] @hasMany
+  posts:[Post] @hasMany(indexName:"byUser",fields:["id"])
 }
 
 type Post @model{
   id:ID!
   title:String!
-  content:String!
-  user:User @belongsTo
+  content:String @default(value:"This is my first post")
+  userId:ID! @index(name:"byUser", sortKeyFields:["createdAt"])
+  user:User @belongsTo(fields:["userId"])
+  createdAt:AWSDateTime
 }
 
 enum Status{

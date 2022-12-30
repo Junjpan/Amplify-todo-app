@@ -10,19 +10,19 @@ export const createUser = /* GraphQL */ `
       id
       name
       email
-      createdAt
       status
       posts {
         items {
           id
           title
           content
+          userId
           createdAt
           updatedAt
-          userPostsId
         }
         nextToken
       }
+      createdAt
       updatedAt
     }
   }
@@ -36,19 +36,19 @@ export const updateUser = /* GraphQL */ `
       id
       name
       email
-      createdAt
       status
       posts {
         items {
           id
           title
           content
+          userId
           createdAt
           updatedAt
-          userPostsId
         }
         nextToken
       }
+      createdAt
       updatedAt
     }
   }
@@ -62,19 +62,19 @@ export const deleteUser = /* GraphQL */ `
       id
       name
       email
-      createdAt
       status
       posts {
         items {
           id
           title
           content
+          userId
           createdAt
           updatedAt
-          userPostsId
         }
         nextToken
       }
+      createdAt
       updatedAt
     }
   }
@@ -88,20 +88,20 @@ export const createPost = /* GraphQL */ `
       id
       title
       content
+      userId
       user {
         id
         name
         email
-        createdAt
         status
         posts {
           nextToken
         }
+        createdAt
         updatedAt
       }
       createdAt
       updatedAt
-      userPostsId
     }
   }
 `;
@@ -114,20 +114,20 @@ export const updatePost = /* GraphQL */ `
       id
       title
       content
+      userId
       user {
         id
         name
         email
-        createdAt
         status
         posts {
           nextToken
         }
+        createdAt
         updatedAt
       }
       createdAt
       updatedAt
-      userPostsId
     }
   }
 `;
@@ -140,20 +140,20 @@ export const deletePost = /* GraphQL */ `
       id
       title
       content
+      userId
       user {
         id
         name
         email
-        createdAt
         status
         posts {
           nextToken
         }
+        createdAt
         updatedAt
       }
       createdAt
       updatedAt
-      userPostsId
     }
   }
 `;
