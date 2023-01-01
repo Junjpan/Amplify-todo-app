@@ -3,10 +3,25 @@
 input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 } # FOR TESTING ONLY!
-type Todo @model {
+
+type User @model {
   id: ID!
   name: String!
-  description: String
-  priority:String
+  email:String! @index(name:"byEmail",queryField:"UserByEmail")
+  status:Status
+  posts:[Post] @hasMany(indexName:"byUser",fields:["id"])
 }
 
+type Post @model{
+  id:ID!
+  title:String!
+  content:String @default(value:"This is my first post")
+  userId:ID! @index(name:"byUser", sortKeyFields:["createdAt"],queryField:"PostByUserId")
+  user:User @belongsTo(fields:["userId"])
+  createdAt:AWSDateTime
+}
+
+enum Status{
+active
+inactive
+}
