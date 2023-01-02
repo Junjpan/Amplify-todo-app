@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import S3FileUpload from 'react-s3';
 // import { createTodo, deleteTodo } from './graphql/mutations';
-// import { listTodos } from './graphql/queries';
+import {listUsers} from '../src/graphql/queries';
 // import { onDeleteTodo } from './graphql/subscriptions';
 window.Buffer=window.Buffer||require('buffer').Buffer;
 
@@ -30,6 +30,14 @@ const App = () => {
 
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value });
+  }
+
+  const ListUsers=async()=>{
+    try{
+      const usersData=await API.graphql(graphqlOperation(listUsers));
+      const users=usersData.data.listUsers.items;
+      console.log(users)
+    }catch(err){console.log('error fetching users',err)}
   }
 
   // async function fetchTodos() {
@@ -82,6 +90,7 @@ const handleUpload = async (file) => {
     <>
     
     <div>
+        <button onClick={ListUsers}>list all Users</button>
         <div>React S3 File Upload</div>
         <input type="file" onChange={handleFileInput}/>
         <button onClick={() => handleUpload(selectedFile)}> Upload to S3</button>
